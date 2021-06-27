@@ -5,14 +5,20 @@ class Home extends Component {
         super(props);
         this.state={
             load:false,
+            sendTo:'',
+            CC:[],
+            subject:'',
+            body:'',
+            scheduleType:'Recurring',
+            schedule:{'val':[0,20,40],'type':"minute"},
+            html:false
         }
+        this.error = false
     }
     componentDidMount(){
-        document.title = "Home";
+        document.title = "Create Mail";
         if(this.props.data ==null){
-            this.props.history.push('/login')
-        }else {
-            fetch('/user/bookings').then(res => res.json()).then(data => { console.log(data); this.data = data; this.setState({ load: true }) })
+            this.props.history.push('/')
         }
     }
     scheduleChange=(e)=>{
@@ -184,7 +190,7 @@ class Home extends Component {
                 <div class="container">
 
                     <div class="d-flex justify-content-between align-items-center">
-                    <h2>Home</h2>
+                    <h2>Create Mails</h2>
                     </div>
 
                 </div>

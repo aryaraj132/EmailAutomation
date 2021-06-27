@@ -1,7 +1,8 @@
 import React, { Component} from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Home from "./pages/home";
+import Home from "./pages/Home"
+import Create from "./pages/Create";
 import PageWrapper from "./PageWrapper";
 import Register from "./pages/Register"
 import Login from "./pages/login"
@@ -23,7 +24,10 @@ export default class App extends Component{
                     render={(props) => <Home {...props} data={this.state.data} changeState={this.updateState} />}
                     />
                     <Route
-                    exact={true}
+                    path="/create"
+                    render={(props) => <Create {...props} data={this.state.data} changeState={this.updateState} />}
+                    />
+                    <Route
                     path="/register"
                     render={(props) => <Register {...props} data={this.state.data} changeState={this.updateState} />}
                     />
