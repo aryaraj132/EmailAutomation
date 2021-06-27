@@ -1,6 +1,10 @@
 # Email Automation
 This Project uses node server to create a mail scheduling system that can take your email and Schedule it.
 
+Available at :
+* [http://18.188.5.74:5000](http://18.188.5.74:5000/)
+* [slash-messy-root.glitch.me](https://slash-messy-root.glitch.me/)
+
 ## Errors
 * Project is in development mode 
 * Hosting on server with insecure connection raises csp issue
