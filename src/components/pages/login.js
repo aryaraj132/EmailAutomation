@@ -70,7 +70,6 @@ class Login extends Component {
                 $('#message').removeClass().text('')
                 $("#submit").attr("disabled",false).text('Login');
                 if(response.status != 200){
-                    console.log(response);
                     $('#message').addClass('text-red').text(`Error ${response.status}: ${response.statusText}`);
                 }
                 else{

@@ -21,7 +21,6 @@ module.exports = {
   optimization: {
     minimize: true,
   },
-  devtool: 'cheap-module-source-map',
   plugins: [
     new webpack.DefinePlugin({
       "process.env": {

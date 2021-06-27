@@ -22,17 +22,25 @@ const EmailSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    uniqueName:{
+        type:String,
+        required:true
+    },
     ScheduleType:{
         type:String,
         required:true
     },
     ScheduleValue:{
-        type:String,
+        type:Object,
         required:true
     },
     Count:{
         type:Number,
         default:0
+    },
+    isHTML:{
+        type:Boolean,
+        default:false
     }
 },
 {timestamps:true}
