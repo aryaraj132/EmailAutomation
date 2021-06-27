@@ -1,4 +1,6 @@
 # Email Automation
+This Project uses node server to create a mail scheduling system that can take your email and Schedule it.
+
 ## Building process
 
 1. Clone this repository
