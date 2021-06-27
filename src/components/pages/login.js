@@ -19,8 +19,9 @@ class Login extends Component {
         let id = e.target.id
         this.setState({[id]:value})
         if(id == 'username'){
-            if(value.length <5 || value.length >20){
-                $('#UsernameError').text(" * Username should be more than 5 character and less than 20 Character.")
+            let emailExp = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i;
+            if(!emailExp.test(value)){
+                $('#UsernameError').text(" * Invalid Format")
             }
             else{
                 $('#UsernameError').text("");
@@ -40,23 +41,24 @@ class Login extends Component {
         $('#message').removeClass().text('')
         e.preventDefault();
         let passExp = new RegExp("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}")
+        let emailExp = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i;
         $('#UsernameError').text("");
         $('#passwordError').text('');
         if(!passExp.test(this.state.password)){
             $('#passwordError').text(' * Your password must be more than 8 characters long, contain an Uppercase letters, a Lowercase letter and a number, and must not contain spaces, special characters, or emoji.')
         }
-        else if(this.state.username.length<5 || this.state.username.length>20) $('#UsernameError').text(" * Username should be more than 5 character and less than 20 Character.")
+        else if(!emailExp.test(this.state.username)) $('#UsernameError').text(" * Invalid Format")
         else{
             $('#message').addClass('text-green').text('Sending request please wait...');
             $("#submit").attr("disabled",true).text('Sending...');
             $('#UsernameError').text("")
             $('#passwordError').text('')
             var csrftoken = $.cookie('csrftoken');
-            fetch("/user/login",{
+            fetch("/api/v1/user/login",{
                 method: "POST",
                 body: JSON.stringify({
-                    username: this.state.username,
-                    pass: this.state.password
+                    email: this.state.username,
+                    password: this.state.password
                 }),
                 headers: {
                     'X-CSRFToken': csrftoken,
@@ -68,19 +70,14 @@ class Login extends Component {
                 $('#message').removeClass().text('')
                 $("#submit").attr("disabled",false).text('Login');
                 if(response.status != 200){
+                    console.log(response);
                     $('#message').addClass('text-red').text(`Error ${response.status}: ${response.statusText}`);
                 }
                 else{
                 response.json().then(data =>{
-                    if(data.error==undefined){
-                        $('#message').addClass('text-green').text(data.success);
-                        localStorage.setItem('UserInfo', JSON.stringify(data.info));
-                        this.props.changeState(data.info)
+                        localStorage.setItem('UserInfo', JSON.stringify(data));
+                        this.props.changeState(data)
                         this.props.history.push("/");
-                    }
-                    else{
-                        $('#message').addClass('text-red').text(data.error);
-                    }
                 })}
             }.bind(this)).catch(error=>{
                 $('#message').addClass('text-red').text(error)
@@ -111,8 +108,8 @@ class Login extends Component {
                             <span id="message"></span>
                             <form onSubmit={this.handleSubmit}>
                                     <div class="form-group">
-                                        <label for="username">Username or Email</label>
-                                        <input type="text" class="form-control" onChange={this.handleChange} id="username" placeholder="Username or Email" required />
+                                        <label for="username">Email</label>
+                                        <input type="text" class="form-control" onChange={this.handleChange} id="username" placeholder="Email" required />
                                         <small id="UsernameError" class="form-text text-muted text-red">
                                         </small>
                                     </div>
@@ -125,10 +122,7 @@ class Login extends Component {
                                 <button type="submit" id="submit" onClick={this.handleSubmit} class="btn btn-primary">Login</button>
                             </form>
                             <hr />
-                            <div class="d-flex justify-content-around flex-wrap">
-                            <p><Link to="/forgot-password">Forgot Password ?</Link></p>
                         <p>New Here? <Link to="/register">Sign Up</Link> </p>
-                        </div>
                         </div>
                     </div>
                 </section>

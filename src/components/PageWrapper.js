@@ -18,13 +18,9 @@ class PageWrapper extends Component {
     }
     logout = (e) =>{
         e.preventDefault();
-        fetch('/user/logout').then(response => response.json()).then(function(data){
             localStorage.clear();
             this.props.changeState(null);
             this.props.history.push('/')
-        }.bind(this)).catch(error=>{
-            console.log(error);
-        })
     }
     render() {
         return (
@@ -50,13 +46,7 @@ class PageWrapper extends Component {
                         <li><Link to="/register">Register</Link></li>
                         <li><Link to="/login">Login</Link></li>
                         </>:
-                        <>
-                        {this.props.data.authenticated &&
-                        <>
                         <li><Link onClick={this.logout} to="/">Logout</Link></li>
-                        </>
-                        }
-                        </>
                         }
                         </ul>
                         </li>
@@ -82,13 +72,7 @@ class PageWrapper extends Component {
                         <li><Link onClick={this.mobileNavIcon} to="/register">Register</Link></li>
                         <li><Link onClick={this.mobileNavIcon} to="/login">Login</Link></li>
                         </>:
-                        <>
-                        {this.props.data.authenticated &&
-                        <>
                         <li><Link onClick={this.logout} onClick={this.mobileNavIcon} to="/">Logout</Link></li>
-                        </>
-                        }
-                        </>
                         }
                         </ul>
                         </li>

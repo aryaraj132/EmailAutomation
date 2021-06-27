@@ -9,7 +9,6 @@ class Register extends Component {
             email:'',
             password:'',
             cnfpass:'',
-            mentor:false
         }
     }
     componentDidMount(){
@@ -55,14 +54,6 @@ class Register extends Component {
             }
         }
     }
-    handleMentor = (e) =>{
-        let el = e.target
-        if ($(el).prop("checked")){
-            this.setState({[el.id]:true})
-        }else{
-            this.setState({[el.id]:false})
-        }
-    }
     handleSubmit = (e) =>{
         $('#message').removeClass().text('')
         e.preventDefault();
@@ -89,10 +80,10 @@ class Register extends Component {
             $('#UsernameError').text("")
             $('#passwordError').text('')
             var csrftoken = $.cookie('csrftoken');
-            fetch("/user/signup",{
+            fetch("/api/v1/user/register",{
                 method: "POST",
                 body: JSON.stringify({
-                    username:this.state.username,email:this.state.email,pass:this.state.password,cnfpass:this.state.cnfpass,isMentor:this.state.mentor,
+                    username:this.state.username,email:this.state.email,password:this.state.password,
                 }),
                 headers: {
                     'X-CSRFToken': csrftoken,
@@ -108,15 +99,8 @@ class Register extends Component {
                 }
                 else{
                 response.json().then(data =>{
-                    if(data.error==undefined){
-                        $('#message').addClass('text-green').text(data.success);
-                        localStorage.setItem('UserInfo', JSON.stringify(data.info));
-                        this.props.changeState(data.info)
-                        this.props.history.push("/");
-                    }
-                    else{
-                        $('#message').addClass('text-red').text(data.error);
-                    }
+                        alert(data.info)
+                        this.props.history.push("/login");
                 })}
             }.bind(this)).catch(error=>{
                 $('#message').addClass('text-red').text(error)
@@ -173,12 +157,6 @@ class Register extends Component {
                                         <small id="pass-missmatch" class="form-text text-muted text-red">
                                             
                                         </small>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" onChange={this.handleMentor} type="checkbox" value="" id="mentor" />
-                                    <label class="form-check-label" for="mentor">
-                                        Register as Mentor
-                                    </label>
                                 </div>
                                 <br />
                                 <button type="submit" id="submit" onClick={this.handleSubmit} class="btn btn-primary">Sign Up</button>

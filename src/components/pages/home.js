@@ -13,7 +13,28 @@ class Home extends Component {
         render() {
             return (
             <main id="main">
-                <p>This is Home Page</p>
+                <section class="breadcrumbs">
+                <div class="container">
+
+                    <div class="d-flex justify-content-between align-items-center">
+                    <h2>Home</h2>
+                    </div>
+
+                </div>
+                </section>
+                {this.props.data!=null ?
+                <section class="inner-page">
+                <div class="container">
+                    <p>Logged IN</p>
+                    <p>Welcome {this.props.data.username}</p>
+                </div>
+                </section>
+                :
+                <section class="inner-page">
+                <div class="container">
+                    <p>Logged Out</p>
+                </div>
+                </section>}
             </main>
         )}
 }
