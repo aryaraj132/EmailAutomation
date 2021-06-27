@@ -91,14 +91,14 @@ router.post('/cancel-schedule',async (req,res)=>{
         const email = await Email.findByIdAndDelete(req.body.id)
         res.status(200).send("Task Stopped")
     }
-    catch(err){console.error(err);res.status(500).statusMessage="Not Created";res.send()}
+    catch(err){console.error(err);res.status(500).statusMessage="Not Cancelled";res.send()}
 })
-router.get('/get-mails/:name',async (req,res)=>{
+router.get('/get-mails/:id',async (req,res)=>{
     try {
-        const mails = await Email.findOne({uniqueName:req.params.name})
+        const mails = await Email.findOne({userID:req.params.id})
         res.status(200).json(mails)
     }
-    catch(err){console.error(err);res.status(500).statusMessage="Not Created";res.send()}
+    catch(err){console.error(err);res.status(500).statusMessage="Not Found";res.send()}
 })
 router.get('/start',(req,res)=>{
     const rule = new schedule.RecurrenceRule();
