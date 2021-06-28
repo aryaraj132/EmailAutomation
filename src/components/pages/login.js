@@ -103,6 +103,7 @@ class Login extends Component {
 
                 <section class="inner-page">
                     <div class="container">
+                    <div className="m-4 p-4"><div class="g-signin2" data-onsuccess="onSignIn"></div></div>
                         <div className="form-container">
                             <span id="message"></span>
                             <form onSubmit={this.handleSubmit}>

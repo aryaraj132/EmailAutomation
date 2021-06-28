@@ -7,9 +7,13 @@ const Email = require("./modals/emailModal.js")
 
 router.post("/new-email", async (req,res)=>{
     try {
-        const user = await User.findById(req.body.userID)
+        let Unique_name = ''
         const mails = await Email.find({userID:req.body.userID})
-        let Unique_name = user.username + mails.length
+        try{const user = await User.findById(req.body.userID)
+        Unique_name = user.username + mails.length}
+        catch{
+            Unique_name = req.body.userID + '_' + mails.length
+        }
         const email = await new Email({
             uniqueName:Unique_name,
             userID:req.body.userID,

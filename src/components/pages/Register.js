@@ -107,6 +107,7 @@ class Register extends Component {
             })
         }
     }
+
     render() {
         return (
             <main id="main">
@@ -162,7 +163,7 @@ class Register extends Component {
                                 <button type="submit" id="submit" onClick={this.handleSubmit} class="btn btn-primary">Sign Up</button>
                             </form>
                         <hr />
-                        <p>Already signed up? Login <Link to="/login">here</Link> </p>
+                        <p>Already signed up? Login <a href="/login">here</a> </p>
                         </div>
                     </div>
                 </section>

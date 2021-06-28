@@ -10,6 +10,12 @@
     <meta name="author" content="Aryan Raj">
     <meta content="" name="description">
     <meta content="" name="keywords">
+    <link rel="dns-prefetch preconnect" href="https://apis.google.com" crossorigin>
+    <link rel="dns-prefetch preconnect" href="https://accounts.google.com" crossorigin>
+    <link rel="dns-prefetch preconnect" href="/static/img">
+    <link rel="dns-prefetch preconnect" href="/static/vendor">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="970651270283-q3dt7apnpphg2r6apav0h3vggmb3fr51.apps.googleusercontent.com">
     <link href="/static/img/favicon.png" rel="icon">
     <link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon">
     <title></title>
@@ -80,5 +86,19 @@
       <script src="/static/js/main.js"></script>
     <div class="mobile-nav-overly"></div>
       <script src="/static/reactApp/script.js"></script>
+      <script>
+        function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        let obj = new Object;
+        obj = {
+          "_id": profile.getId(),
+          "username": profile.getName(),
+          "email": profile.getEmail()
+        }
+        localStorage.setItem('UserInfo', JSON.stringify(obj));
+        console.log(obj);
+        location.replace("/")
+      }
+      </script>
 </body>
 </html>

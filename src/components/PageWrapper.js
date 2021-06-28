@@ -18,9 +18,13 @@ class PageWrapper extends Component {
     }
     logout = (e) =>{
         e.preventDefault();
-            localStorage.clear();
-            this.props.changeState(null);
-            this.props.history.push('/login')
+        localStorage.clear();
+        this.props.changeState(null);
+        location.replace("/login")
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+        console.log('User signed out.');
+        });
     }
     render() {
         return (
@@ -50,7 +54,7 @@ class PageWrapper extends Component {
                         {this.props.data == null ?
                         <>
                         <li><Link to="/register">Register</Link></li>
-                        <li><Link to="/login">Login</Link></li>
+                        <li><a href="/login">Login</a></li>
                         </>:
                         <li><Link onClick={this.logout} to="/">Logout</Link></li>
                         }
@@ -82,7 +86,7 @@ class PageWrapper extends Component {
                         {this.props.data == null ?
                         <>
                         <li><Link onClick={this.mobileNavIcon} to="/register">Register</Link></li>
-                        <li><Link onClick={this.mobileNavIcon} to="/login">Login</Link></li>
+                        <li><a onClick={this.mobileNavIcon} href="/login">Login</a></li>
                         </>:
                         <li><Link onClick={this.logout} onClick={this.mobileNavIcon} to="/">Logout</Link></li>
                         }
