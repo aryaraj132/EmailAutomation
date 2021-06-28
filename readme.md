@@ -2,7 +2,7 @@
 This Project uses node server to create a mail scheduling system that can take your email and Schedule it.
 
 Available at :
-* [http://18.188.5.74:5000](http://18.188.5.74:5000/) | CSP issue
+* [http://18.188.5.74:5000](http://18.188.5.74:5000/) | CSP issue Fixed
 * [emailautomation.openode.io](https://emailautomation.openode.io/) | Working
 * [Heroku](https://email-automation-mern.herokuapp.com/) | Working
 
