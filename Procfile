@@ -1,2 +1,2 @@
-release: npm install -g nodemon && npm install
+release: npm install
 web: npm start
