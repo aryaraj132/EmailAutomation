@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "dev": "webpack --mode development --watch",
-    "build": "webpack --mode production"
+    "start": "nodemon index.js"
   },
   "engines": {
     "node": ">=10.0.0",
