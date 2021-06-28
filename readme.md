@@ -2,8 +2,8 @@
 This Project uses node server to create a mail scheduling system that can take your email and Schedule it.
 
 Available at :
-* [http://18.188.5.74:5000](http://18.188.5.74:5000/)
-* [slash-messy-root.glitch.me](https://slash-messy-root.glitch.me/)
+* [http://18.188.5.74:5000](http://18.188.5.74:5000/) | CSP issue
+* [emailautomation.openode.io](https://emailautomation.openode.io/) | Working
 
 ## Errors
 * Project is in development mode 
