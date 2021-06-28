@@ -10,6 +10,7 @@
     <meta name="author" content="Aryan Raj">
     <meta content="" name="description">
     <meta content="" name="keywords">
+    <meta name="google-site-verification" content="x-6btiqB9WFnDwIZNUyS5SYyzckpovDijqri4ye1Epk" />
     <link rel="dns-prefetch preconnect" href="https://apis.google.com" crossorigin>
     <link rel="dns-prefetch preconnect" href="https://accounts.google.com" crossorigin>
     <link rel="dns-prefetch preconnect" href="/static/img">
@@ -87,6 +88,12 @@
     <div class="mobile-nav-overly"></div>
       <script src="/static/reactApp/script.js"></script>
       <script>
+        function signout(){
+          var auth2 = gapi.auth2.getAuthInstance();
+          auth2.signOut().then(function () {
+            console.log('User signed out.');
+          });
+        }
         function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
         let obj = new Object;
