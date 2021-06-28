@@ -4,6 +4,7 @@ This Project uses node server to create a mail scheduling system that can take y
 Available at :
 * [http://18.188.5.74:5000](http://18.188.5.74:5000/) | CSP issue
 * [emailautomation.openode.io](https://emailautomation.openode.io/) | Working
+* [Heroku](https://email-automation-mern.herokuapp.com/) | Working
 
 ## Errors
 * Project is in development mode 
