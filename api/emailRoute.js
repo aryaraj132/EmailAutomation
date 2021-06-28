@@ -83,19 +83,19 @@ router.post("/new-email", async (req,res)=>{
     res.status(200).json({'info':'Mail Scheduled Successfully'})}
     catch(err){console.error(err);res.status(500).statusMessage="Not Created";res.send()}
 })
-router.post('/cancel-schedule',async (req,res)=>{
+router.get('/cancel-schedule/:id',async (req,res)=>{
     try {
-        const mail = await Email.findById(req.body.id)
+        const mail = await Email.findById(req.params.id)
         let current_job = schedule.scheduledJobs[mail.uniqueName];
+        const email = await Email.findByIdAndDelete(req.params.id)
         current_job.cancel();
-        const email = await Email.findByIdAndDelete(req.body.id)
-        res.status(200).send("Task Stopped")
+        res.status(200).json({"info":"Task Stopped"})
     }
-    catch(err){console.error(err);res.status(500).statusMessage="Not Cancelled";res.send()}
+    catch(err){console.error(err);res.status(200).statusMessage="Not Cancelled";res.send()}
 })
 router.get('/get-mails/:id',async (req,res)=>{
     try {
-        const mails = await Email.findOne({userID:req.params.id})
+        const mails = await Email.find({userID:req.params.id})
         res.status(200).json(mails)
     }
     catch(err){console.error(err);res.status(500).statusMessage="Not Found";res.send()}

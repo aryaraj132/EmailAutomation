@@ -2,6 +2,7 @@ import React, { Component} from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from "./pages/Home"
+import History from "./pages/History"
 import Create from "./pages/Create";
 import PageWrapper from "./PageWrapper";
 import Register from "./pages/Register"
@@ -26,6 +27,10 @@ export default class App extends Component{
                     <Route
                     path="/create"
                     render={(props) => <Create {...props} data={this.state.data} changeState={this.updateState} />}
+                    />
+                    <Route
+                    path="/history"
+                    render={(props) => <History {...props} data={this.state.data} changeState={this.updateState} />}
                     />
                     <Route
                     path="/register"

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link,withRouter} from'react-router-dom';
-class Home extends Component {
+class History extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -9,7 +9,7 @@ class Home extends Component {
         this.data = null
     }
     componentDidMount(){
-        document.title = "Home";
+        document.title = "History";
         if(this.props.data ==null){
             this.props.history.push('/login')
         }
@@ -20,7 +20,7 @@ class Home extends Component {
             .then((data) => {
                 let arr = []
                 data.forEach(obj => {
-                    if(obj.Count == 0){
+                    if(obj.Count > 0){
                         arr.push(obj)
                     }
                 });
@@ -31,13 +31,6 @@ class Home extends Component {
                 console.log(data);
             });
     }
-    cancelSchedule=(e,id)=>{
-        e.preventDefault();
-        fetch("/api/v1/email/cancel-schedule/"+id).then((response) => response.json()).then((data) => {
-                this.setState({load:false})
-                this.fetchData();
-            });
-    }
         render() {
             return (
             <main id="main">
@@ -45,19 +38,19 @@ class Home extends Component {
                 <div class="container">
 
                     <div class="d-flex justify-content-between align-items-center">
-                    <h2>Home</h2>
+                    <h2>History</h2>
                     </div>
 
                 </div>
                 </section>
                 <section class="inner-page">
                 <div class="container">
-                <h3>Future Emails</h3>
+                <h3>Sent Emails</h3>
                     {this.state.load &&
                     <>
                     {
                         this.data == null || this.data.length==0 ?
-                        <h2>No Future Emails Scheduled</h2>:
+                        <h2>No Sent Emails Found</h2>:
                         <div className="position-relative d-flex flex-wrap flex-row justify-content-around">
                         {this.data.map((data,idx)=>{
                             return(
@@ -72,9 +65,9 @@ class Home extends Component {
                                             <span className="float-right">{data.ScheduleType}</span><br />
                                             <span className="float-right">
                                                 {data.ScheduleValue.month!= undefined && data.ScheduleValue.month + ", "}{data.ScheduleValue.date!= undefined && data.ScheduleValue.date + ", "}{data.ScheduleValue.day!= undefined && data.ScheduleValue.day + ", "}{data.ScheduleValue.hour!= undefined && data.ScheduleValue.hour + ", "}{data.ScheduleValue.minute!= undefined && data.ScheduleValue.minute + ", "}{data.ScheduleValue.val!= undefined && <> {data.ScheduleValue.val.length==3 ? "20, " : "30, "}</>}{data.ScheduleValue.type!= undefined && data.ScheduleValue.type + ", "}
-                                      </span><br />
+                                            </span><br />
+                                            Sent : {data.Count} times<br />
                                         </p>
-                                        <button className="btn btn-danger" onClick={(e)=>{this.cancelSchedule(e,data._id)}}>Cancel Schedule</button>
                                     </div>
                                 </div>
                             );
@@ -88,4 +81,4 @@ class Home extends Component {
             </main>
         )}
 }
-export default withRouter(Home)
+export default withRouter(History)

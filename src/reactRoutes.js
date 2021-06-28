@@ -4,6 +4,9 @@ const router = express.Router()
 router.get('/create', (req, res)=>{
     res.render('index');   
 });
+router.get('/history', (req, res)=>{
+    res.render('index');   
+});
 router.get('/', (req, res)=>{
     res.render('index');   
 });

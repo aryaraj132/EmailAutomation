@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link,withRouter} from'react-router-dom';
-class Home extends Component {
+class Create extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -167,7 +167,7 @@ class Home extends Component {
                 else{
                 response.json().then(data =>{
                     alert(data.info)
-                    this.setState({load:true})
+                    this.props.history.push('/')
                 })}
             }.bind(this)).catch(error=>{
                 $('#message').addClass('text-red').text(error)
@@ -369,4 +369,4 @@ class Home extends Component {
             </main>
         )}
 }
-export default withRouter(Home)
+export default withRouter(Create)

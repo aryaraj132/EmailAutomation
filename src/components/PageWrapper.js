@@ -20,7 +20,7 @@ class PageWrapper extends Component {
         e.preventDefault();
             localStorage.clear();
             this.props.changeState(null);
-            this.props.history.push('/')
+            this.props.history.push('/login')
     }
     render() {
         return (
@@ -34,6 +34,12 @@ class PageWrapper extends Component {
                     <nav className="nav-menu d-none d-lg-block">
                         <ul>
                         <li><Link to="/">Home</Link></li>
+                        {this.props.data != null &&
+                        <>
+                        <li><Link to="/create">Create Mail</Link></li>
+                        <li><Link to="/history">History</Link></li>
+                        </>
+                        }
                         <li class="drop-down"><a onClick={this.dropdownClick}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -59,6 +65,12 @@ class PageWrapper extends Component {
                 <nav className="mobile-nav d-lg-none">
                     <ul>
                     <li><Link onClick={this.mobileNavIcon} to="/">Home</Link></li>
+                    {this.props.data != null &&
+                    <>
+                    <li><Link onClick={this.mobileNavIcon} to="/create">Create Mail</Link></li>
+                    <li><Link onClick={this.mobileNavIcon} to="/history">History</Link></li>
+                    </>
+                    }
                         
                         <li class="drop-down"><a onClick={this.dropdownClick}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
