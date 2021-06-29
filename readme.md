@@ -6,7 +6,7 @@ Available at :
 * [Heroku](https://email-automation-mern.herokuapp.com/) | Working
 * [emailautomation.openode.io](https://emailautomation.openode.io/) | Working
 
-## Errors
+## Issues
 * Project is in development mode 
 * Hosting on server with insecure connection raises csp issue
     * Change your Browser Settings or Build app locally.
