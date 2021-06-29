@@ -24,7 +24,6 @@ class Home extends Component {
                     this.data = data
                 }
                 this.setState({load:true})
-                console.log(data);
             });
     }
     cancelSchedule=(e,id)=>{

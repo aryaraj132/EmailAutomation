@@ -28,7 +28,6 @@ class History extends Component {
                     this.data = arr
                 }
                 this.setState({load:true})
-                console.log(data);
             });
     }
         render() {

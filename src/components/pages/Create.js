@@ -190,7 +190,6 @@ class Create extends Component {
         }else{
             this.setState({[el.id]:false})
         }
-        console.log(this.state);
     }
         render() {
             return (

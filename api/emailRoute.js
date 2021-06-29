@@ -71,8 +71,8 @@ router.post("/new-email", async (req,res)=>{
         var transporter = nodemailer.createTransport({  
             service: 'gmail',  
             auth: {  
-              user: 'aryaraj132@gmail.com',  
-              pass: 'gdkrffgpocoyrpvl'  
+              user: 'bckibimari@gmail.com',  
+              pass: 'kbvovxutgizsajme'  
             }  
           });
           if(mail.isHTML){
@@ -106,7 +106,8 @@ router.get('/cancel-schedule/:id',async (req,res)=>{
         const mail = await Email.findById(req.params.id)
         let current_job = schedule.scheduledJobs[mail.uniqueName];
         const email = await Email.findByIdAndDelete(req.params.id)
-        current_job.cancel();
+        try{current_job.cancel();}
+        catch{null}
         res.status(200).json({"info":"Task Stopped"})
     }
     catch(err){console.error(err);res.status(200).statusMessage="Not Cancelled";res.send()}
