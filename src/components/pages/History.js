@@ -16,7 +16,7 @@ class History extends Component {
         this.fetchData();}
     }
     fetchData=()=>{
-        fetch("/api/v1/email/get-mails/"+this.props.data._id).then((response) => response.json())
+        fetch("/api/v1/email/get-mailHist/"+this.props.data._id).then((response) => response.json())
             .then((data) => {
                 let arr = []
                 data.forEach(obj => {

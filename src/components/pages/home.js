@@ -20,14 +20,8 @@ class Home extends Component {
     fetchData=()=>{
         fetch("/api/v1/email/get-mails/"+this.props.data._id).then((response) => response.json())
             .then((data) => {
-                let arr = []
-                data.forEach(obj => {
-                    if(obj.Count == 0){
-                        arr.push(obj)
-                    }
-                });
-                if (arr.length>0) {
-                    this.data = arr
+                if (data.length>0) {
+                    this.data = data
                 }
                 this.setState({load:true})
                 console.log(data);
@@ -36,8 +30,7 @@ class Home extends Component {
     cancelSchedule=(e,id)=>{
         e.preventDefault();
         fetch("/api/v1/email/cancel-schedule/"+id).then((response) => response.json()).then((data) => {
-                this.setState({load:false})
-                this.fetchData();
+                location.reload()
             });
     }
         render() {
@@ -58,7 +51,7 @@ class Home extends Component {
                     {this.state.load &&
                     <>
                     {
-                        this.data == null || this.data.length==0 ?
+                        this.data == null ?
                         <h2>No Future Emails Scheduled</h2>:
                         <div className="position-relative d-flex flex-wrap flex-row justify-content-around">
                         {this.data.map((data,idx)=>{

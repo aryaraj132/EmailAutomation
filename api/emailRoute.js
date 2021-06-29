@@ -4,15 +4,17 @@ const nodemailer = require("nodemailer");
 const schedule = require('node-schedule');
 const User = require("./modals/userModal.js")
 const Email = require("./modals/emailModal.js")
+const EmailHistory = require("./modals/emailHistoryModal")
 
 router.post("/new-email", async (req,res)=>{
     try {
         let Unique_name = ''
+        const emails = await EmailHistory.find({userID:req.body.userID})
         const mails = await Email.find({userID:req.body.userID})
         try{const user = await User.findById(req.body.userID)
-        Unique_name = user.username + mails.length}
+        Unique_name = user.username + emails.length}
         catch{
-            Unique_name = req.body.userID + '_' + mails.length
+            Unique_name = req.body.userID + '_' + emails.length
         }
         const email = await new Email({
             uniqueName:Unique_name,
@@ -26,6 +28,18 @@ router.post("/new-email", async (req,res)=>{
             ScheduleValue:req.body.schedule
     })
     await email.save()
+        const emailHist = await new EmailHistory({
+            uniqueName:Unique_name,
+            userID:req.body.userID,
+            sendTo:req.body.sendTo,
+            CC:req.body.CC,
+            Subject:req.body.subject,
+            Body:req.body.mailBody,
+            isHTML:req.body.html,
+            ScheduleType:req.body.scheduleType,
+            ScheduleValue:req.body.schedule
+    })
+    await emailHist.save()
     const rule = new schedule.RecurrenceRule();
     if(req.body.scheduleType=='Recurring'){
         if(req.body.schedule.type=='minute'){
@@ -51,7 +65,7 @@ router.post("/new-email", async (req,res)=>{
         rule.minute = req.body.schedule.minute
     }
     const job = schedule.scheduleJob(Unique_name,rule, async function(Unique_name){
-        try{const mail = await Email.findOne({uniqueName:Unique_name})
+        try{const mail = await EmailHistory.findOne({uniqueName:Unique_name})
         let count = mail.Count
         count += 1
         var transporter = nodemailer.createTransport({  
@@ -78,7 +92,7 @@ router.post("/new-email", async (req,res)=>{
                 text: mail.Body  
               });
           }
-        const email = await Email.findByIdAndUpdate(mail._id,{Count:count})
+        const email = await EmailHistory.findByIdAndUpdate(mail._id,{Count:count})
         console.log('Mail ',Unique_name,' sent.');}
         catch(err){
             console.log(err);
@@ -100,6 +114,13 @@ router.get('/cancel-schedule/:id',async (req,res)=>{
 router.get('/get-mails/:id',async (req,res)=>{
     try {
         const mails = await Email.find({userID:req.params.id})
+        res.status(200).json(mails)
+    }
+    catch(err){console.error(err);res.status(500).statusMessage="Not Found";res.send()}
+})
+router.get('/get-mailHist/:id',async (req,res)=>{
+    try {
+        const mails = await EmailHistory.find({userID:req.params.id})
         res.status(200).json(mails)
     }
     catch(err){console.error(err);res.status(500).statusMessage="Not Found";res.send()}

@@ -129,7 +129,13 @@ class Create extends Component {
             this.setState({[id]:value})
         }
         if (id == 'scheduleType'){
+            if(value == 'Recurring'){
+                this.setState({schedule:{'val':[0,20,40],'type':"minute"}})
+                this.error = false
+            }
+            else{
             this.setState({schedule:null})
+            this.error = false}
         }
     }
     handleSubmit = (e) =>{
@@ -137,7 +143,10 @@ class Create extends Component {
         e.preventDefault();
         if(this.error){
             $('#message').addClass('text-red').text("Fix Formatting Errors")
-        }else{
+        }else if(this.state.schedule == null){
+            $('#message').addClass('text-red').text("Please Set a schedule")
+        }
+        else{
             $('#message').removeClass().text('')
             var csrftoken = $.cookie('csrftoken');
             fetch("/api/v1/email/new-email",{
@@ -181,7 +190,7 @@ class Create extends Component {
         }else{
             this.setState({[el.id]:false})
         }
-        console.log(this.state)
+        console.log(this.state);
     }
         render() {
             return (
