@@ -11,7 +11,7 @@ class Home extends Component {
     componentDidMount(){
         document.title = "Home";
         if(this.props.data ==null){
-            location.replace("/login")
+        this.props.history.push("/login");
         }
         else{
         this.fetchData();

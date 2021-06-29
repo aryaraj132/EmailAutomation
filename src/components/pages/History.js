@@ -11,7 +11,7 @@ class History extends Component {
     componentDidMount(){
         document.title = "History";
         if(this.props.data ==null){
-            location.replace("/login")
+            this.props.history.push("/login");
         }else{
         this.fetchData();}
     }

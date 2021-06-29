@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link, withRouter} from'react-router-dom';
-
+import { GoogleLogout } from 'react-google-login';
 class PageWrapper extends Component {
     constructor(props){
         super(props);
@@ -20,8 +20,12 @@ class PageWrapper extends Component {
         e.preventDefault();
         localStorage.clear();
         this.props.changeState(null);
-        signout();
-        location.replace("/login")
+        this.props.history.push("/login");
+    }
+    logoutGoogle=()=>{
+        localStorage.clear();
+        this.props.changeState(null);
+        this.props.history.push("/login");
     }
     render() {
         return (
@@ -51,9 +55,19 @@ class PageWrapper extends Component {
                         {this.props.data == null ?
                         <>
                         <li><Link to="/register">Register</Link></li>
-                        <li><a href="/login">Login</a></li>
+                        <li><Link to="/login">Login</Link></li>
                         </>:
-                        <li><Link onClick={this.logout} to="/">Logout</Link></li>
+                        <>
+                        {this.props.data.method != undefined && this.props.data.method == "Google" ?
+                        <GoogleLogout 
+                            clientId="970651270283-q3dt7apnpphg2r6apav0h3vggmb3fr51.apps.googleusercontent.com"
+                            buttonText="Logout"
+                            onLogoutSuccess={this.logoutGoogle}
+                            cookiePolicy={'single_host_origin'}
+                        />
+                        :<li><Link onClick={this.logout} to="/">Logout</Link></li>
+                        }
+                        </>
                         }
                         </ul>
                         </li>
@@ -83,9 +97,19 @@ class PageWrapper extends Component {
                         {this.props.data == null ?
                         <>
                         <li><Link onClick={this.mobileNavIcon} to="/register">Register</Link></li>
-                        <li><a onClick={this.mobileNavIcon} href="/login">Login</a></li>
+                        <li><Link onClick={this.mobileNavIcon} to="/login">Login</Link></li>
                         </>:
+                        <>
+                        {this.props.data.method != undefined && this.props.data.method == "Google" ?
+                        <GoogleLogout 
+                            clientId="970651270283-q3dt7apnpphg2r6apav0h3vggmb3fr51.apps.googleusercontent.com"
+                            buttonText="Logout"
+                            onLogoutSuccess={this.logoutGoogle}
+                            cookiePolicy={'single_host_origin'}
+                        />:
                         <li><Link onClick={this.logout} onClick={this.mobileNavIcon} to="/">Logout</Link></li>
+                        }
+                        </>
                         }
                         </ul>
                         </li>

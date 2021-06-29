@@ -18,7 +18,7 @@ class Create extends Component {
     componentDidMount(){
         document.title = "Create Mail";
         if(this.props.data ==null){
-            location.replace("/login")
+            this.props.history.push("/login");
         }
     }
     scheduleChange=(e)=>{

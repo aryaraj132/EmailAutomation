@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link, withRouter} from'react-router-dom';
+import GoogleLogin from 'react-google-login';
 class Login extends Component {
     constructor(props){
         super(props);
@@ -84,6 +85,23 @@ class Login extends Component {
             
         }
     }
+    responseGoogle = (response) =>{
+        let profile = response.profileObj
+        let obj = new Object;
+        obj = {
+          "_id": profile.googleId,
+          "username": profile.name,
+          "email": profile.email,
+          "method":"Google"
+        }
+        localStorage.setItem('UserInfo', JSON.stringify(obj));
+        this.props.changeState(obj)
+        this.props.history.push("/");
+    }
+    responseGoogleFail = (res) =>{
+        alert("Failed to login!!");
+        console.log(res);
+    }
     render() {
         return (
             <main id="main">
@@ -103,7 +121,15 @@ class Login extends Component {
 
                 <section class="inner-page">
                     <div class="container">
-                    <div className="m-4 p-4"><div class="g-signin2" data-onsuccess="onSignIn"></div></div>
+                    <div className="m-4 p-4">
+                        <GoogleLogin 
+                            clientId="970651270283-q3dt7apnpphg2r6apav0h3vggmb3fr51.apps.googleusercontent.com"
+                            buttonText="Login With Google"
+                            onSuccess={this.responseGoogle}
+                            onFailure={this.responseGoogleFail}
+                            cookiePolicy={'single_host_origin'}
+                        />    
+                    </div>
                         <div className="form-container">
                             <span id="message"></span>
                             <form onSubmit={this.handleSubmit}>
