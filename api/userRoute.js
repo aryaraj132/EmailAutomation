@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const User = require("./modals/userModal.js")
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcryptjs")
 
 router.post("/register", async (req,res)=>{
     try {
