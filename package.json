@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "dev": "webpack --mode development --watch",
-    "build": "webpack --mode production"
+    // "dev": "webpack --mode development --watch",
+    // "build": "webpack --mode production"
   },
   "engines": {
-    "node": "16.13.0",
+    "node": ">=16.13.0",
     "npm": ">=6.0.0"
   },
   "keywords": [],
