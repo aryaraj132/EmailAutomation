@@ -9,7 +9,6 @@ const SenderMailSchema = new mongoose.Schema({
         type:String,
         required:true,
         max:50,
-        unique:true
     },
     password:{
         type:String,

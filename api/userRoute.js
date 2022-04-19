@@ -48,7 +48,6 @@ router.post("/login", async (req,res)=>{
         res.send()}
 })
 router.post("/sender-info", async (req,res)=>{
-    console.log(req.body)
     try {
         const sender = await Sender.findOne({senderID:req.body.userID})
         if(sender){
