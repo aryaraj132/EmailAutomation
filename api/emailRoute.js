@@ -71,8 +71,8 @@ router.post("/new-email", async (req,res)=>{
         var transporter = nodemailer.createTransport({  
             service: 'gmail',  
             auth: {  
-              user: 'bckibimari@gmail.com',  
-              pass: 'kbvovxutgizsajme'  
+              user: '',  
+              pass: ''  
             }  
           });
           if(mail.isHTML){
