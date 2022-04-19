@@ -2,9 +2,9 @@
 This Project uses node server to create a mail scheduling system that can take your email and Schedule it.
 
 Available at :
-* [http://18.188.5.74:5000](http://18.188.5.74:5000/) | CSP issue Fixed | Google Login not working(not supported for ip address)
+
+* [email-automate.araj.tk](https://email-automate.araj.tk/) | Working
 * [Heroku](https://email-automation-mern.herokuapp.com/) | Working
-* [emailautomation.openode.io](https://emailautomation.openode.io/) | Working
 
 ## Issues
 * Project is in development mode 
