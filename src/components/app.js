@@ -7,6 +7,7 @@ import Create from "./pages/Create";
 import PageWrapper from "./PageWrapper";
 import Register from "./pages/Register"
 import Login from "./pages/login"
+import Sender from "./pages/sender"
 export default class App extends Component{
     constructor(props){
         super(props);
@@ -39,6 +40,10 @@ export default class App extends Component{
                     <Route
                     path="/login"
                     render={(props) => <Login {...props} data={this.state.data} changeState={this.updateState} />}
+                    />
+                    <Route
+                    path="/sender"
+                    render={(props) => <Sender {...props} data={this.state.data} changeState={this.updateState} />}
                     />
                 </PageWrapper>
             </Router>

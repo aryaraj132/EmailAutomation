@@ -170,7 +170,13 @@ class Create extends Component {
             }).then(function(response){
                 $('#message').removeClass().text('')
                 $("#submit").attr("disabled",false).text('Send Mail');
-                if(response.status != 200){
+                if(response.status == 404){
+                    $('#message').addClass('text-red').text("Sender Data Not Found")
+                    setTimeout(()=>{
+                        this.props.history.push('/sender')
+                        },2000)
+                }
+                else if(response.status != 200){
                     $('#message').addClass('text-red').text(`Error ${response.status}: ${response.statusText}`);
                 }
                 else{

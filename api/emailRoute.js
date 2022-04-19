@@ -5,10 +5,16 @@ const schedule = require('node-schedule');
 const User = require("./modals/userModal.js")
 const Email = require("./modals/emailModal.js")
 const EmailHistory = require("./modals/emailHistoryModal")
+const Sender = require("./modals/senderModal.js")
 
 router.post("/new-email", async (req,res)=>{
     try {
         let Unique_name = ''
+        const sender = await Sender.findOne({senderID:req.body.userID})
+        if(!sender){
+            res.status(404).statusMessage="Sender Data Not Set"
+            res.send()
+        }
         const emails = await EmailHistory.find({userID:req.body.userID})
         const mails = await Email.find({userID:req.body.userID})
         try{const user = await User.findById(req.body.userID)
@@ -71,8 +77,8 @@ router.post("/new-email", async (req,res)=>{
         var transporter = nodemailer.createTransport({  
             service: 'gmail',  
             auth: {  
-              user: '',  
-              pass: ''  
+              user: sender.email,  
+              pass: sender.password  
             }  
           });
           if(mail.isHTML){

@@ -58,6 +58,7 @@ class PageWrapper extends Component {
                         <li><Link to="/login">Login</Link></li>
                         </>:
                         <>
+                        <li><Link to="/sender">Sender Details</Link></li>
                         {this.props.data.method != undefined && this.props.data.method == "Google" ?
                         <GoogleLogout 
                             clientId="970651270283-q3dt7apnpphg2r6apav0h3vggmb3fr51.apps.googleusercontent.com"
@@ -100,6 +101,7 @@ class PageWrapper extends Component {
                         <li><Link onClick={this.mobileNavIcon} to="/login">Login</Link></li>
                         </>:
                         <>
+                        <li><Link onClick={this.mobileNavIcon} to="/sender">Sender Details</Link></li>
                         {this.props.data.method != undefined && this.props.data.method == "Google" ?
                         <GoogleLogout 
                             clientId="970651270283-q3dt7apnpphg2r6apav0h3vggmb3fr51.apps.googleusercontent.com"

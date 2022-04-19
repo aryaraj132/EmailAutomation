@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const User = require("./modals/userModal.js")
+const Sender = require("./modals/senderModal.js")
 const bcrypt = require("bcryptjs")
 
 router.post("/register", async (req,res)=>{
@@ -45,6 +46,28 @@ router.post("/login", async (req,res)=>{
     }
     catch(err){console.error(err);res.status(401)
         res.send()}
+})
+router.post("/sender-info", async (req,res)=>{
+    console.log(req.body)
+    try {
+        const sender = await Sender.findOne({senderID:req.body.userID})
+        if(sender){
+            sender.senderID = req.body.userID
+            sender.email = req.body.email
+            sender.password = req.body.password
+            sender.save()
+        }
+        else{
+        const NewSender = await new Sender({
+            senderID:req.body.userID,
+            email:req.body.email,
+            password:req.body.password
+        })
+        await NewSender.save()
+         }
+        res.status(200).json({'info':"Senders Detail Added Successfully"}).send()
+        }
+        catch(err){console.error(err);res.status(500).statusMessage="Not Registered";res.send()}
 })
 
 

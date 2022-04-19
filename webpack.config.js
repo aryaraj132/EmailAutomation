@@ -4,6 +4,7 @@ const webpack = require("webpack");
 module.exports = {
   entry: "./src/index.js",
   output: {
+    hashFunction: "sha256",
     path: path.resolve(__dirname, "./public/reactApp"),
     filename: "script.js",
   },
@@ -30,3 +31,4 @@ module.exports = {
     }),
   ],
 };
+// export NODE_OPTIONS=--openssl-legacy-provider
