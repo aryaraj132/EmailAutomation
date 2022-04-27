@@ -4,7 +4,7 @@ This Project uses node server to create a mail scheduling system that can take y
 Available at :
 
 * [email-automate.araj.tk](https://email-automate.araj.tk/) | Working
-<!-- * [Heroku](https://email-automation-mern.herokuapp.com/) | Working -->
+* [Heroku](https://email-automation-mern.herokuapp.com/) | Working
 
 ## Issues
 * Project is in development mode 
