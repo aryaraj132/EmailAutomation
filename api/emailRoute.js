@@ -33,7 +33,6 @@ router.post("/new-email", async (req,res)=>{
             ScheduleType:req.body.scheduleType,
             ScheduleValue:req.body.schedule
         })
-    console.log("not returning")
     await email.save()
         const emailHist = await new EmailHistory({
             uniqueName:Unique_name,
