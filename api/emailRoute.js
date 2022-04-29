@@ -14,7 +14,7 @@ router.post("/new-email", async (req,res)=>{
         if(!sender){
             res.status(404).statusMessage="Sender Data Not Set"
             res.send()
-        }
+        }else{
         const emails = await EmailHistory.find({userID:req.body.userID})
         const mails = await Email.find({userID:req.body.userID})
         try{const user = await User.findById(req.body.userID)
@@ -32,7 +32,8 @@ router.post("/new-email", async (req,res)=>{
             isHTML:req.body.html,
             ScheduleType:req.body.scheduleType,
             ScheduleValue:req.body.schedule
-    })
+        })
+    console.log("not returning")
     await email.save()
         const emailHist = await new EmailHistory({
             uniqueName:Unique_name,
@@ -104,7 +105,7 @@ router.post("/new-email", async (req,res)=>{
             console.log(err);
         }
       }.bind(null,Unique_name));
-    res.status(200).json({'info':'Mail Scheduled Successfully'})}
+    res.status(200).json({'info':'Mail Scheduled Successfully'})}}
     catch(err){console.error(err);res.status(500).statusMessage="Not Created";res.send()}
 })
 router.get('/cancel-schedule/:id',async (req,res)=>{
