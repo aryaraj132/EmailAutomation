@@ -5,7 +5,7 @@ This Project is built using express.js server to create a mail scheduling system
 
 Available at :
 
-* [email-automate.araj.tk](https://email-automate.araj.tk/) 
+* [https://email-automate.araj.tk/](https://email-automate.heyaryan.in/)
 <!-- * [Heroku](https://email-automation-mern.herokuapp.com/) | Working -->
 
 
